@@ -1,6 +1,7 @@
 package com.maciej.spring5recipeapp.domain;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class Recipe {
@@ -25,6 +26,12 @@ public class Recipe {
     // Recipe is the owner;
     @OneToOne(cascade = CascadeType.ALL)
     private Notes notes;
+
+    // mappedBy - property in the child class;
+    // Recipe is the owner
+    // It is a bidirectional relationship
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
 
     public Long getId() {
         return id;
@@ -104,5 +111,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
     }
 }
