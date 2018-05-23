@@ -1,15 +1,15 @@
 package com.maciej.spring5recipeapp.controllers;
 
+import com.maciej.spring5recipeapp.commands.RecipeCommand;
 import com.maciej.spring5recipeapp.services.RecipeService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class RecipeController {
 
-    RecipeService recipeService;
+    private final RecipeService recipeService;
 
     public RecipeController(RecipeService recipeService) {
         this.recipeService = recipeService;
@@ -20,5 +20,19 @@ public class RecipeController {
         model.addAttribute("recipe", recipeService.findById(new Long(id)));
 
         return "recipe/show";
+    }
+
+    @RequestMapping("recipe/new")
+    public String newRecipe(Model model) {
+
+        model.addAttribute("recipe", new RecipeCommand());
+        return "recipe/recipeform";
+    }
+
+    @PostMapping("recipe")
+    public String saveOrUpdate(@ModelAttribute RecipeCommand command) { // bind form post parameters to RecipeCommand object;
+        RecipeCommand savedRecipe = recipeService.saveRecipeCommand(command);
+
+        return "redirect:/recipe/show/" + savedRecipe.getId();
     }
 }
