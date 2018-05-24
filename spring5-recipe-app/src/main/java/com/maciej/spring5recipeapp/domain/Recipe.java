@@ -31,7 +31,7 @@ public class Recipe {
     private Byte[] image;
 
     // Recipe is the owner;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval=true)
     private Notes notes;
 
     // mappedBy - property in the child class;
