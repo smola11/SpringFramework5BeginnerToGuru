@@ -2,6 +2,7 @@ package com.maciej.spring5recipeapp.controllers;
 
 import com.maciej.spring5recipeapp.commands.RecipeCommand;
 import com.maciej.spring5recipeapp.domain.Recipe;
+import com.maciej.spring5recipeapp.exceptions.NotFoundException;
 import com.maciej.spring5recipeapp.services.RecipeService;
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +54,15 @@ public class RecipeControllerTest {
     }
 
     @Test
+    public void testGetRecipeNotFound() throws Exception {
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show"))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     public void testGetNewRecipeForm() throws Exception {
         RecipeCommand command = new RecipeCommand();
 
@@ -100,4 +110,5 @@ public class RecipeControllerTest {
 
         verify(recipeService, times(1)).deleteById(anyLong());
     }
+
 }
