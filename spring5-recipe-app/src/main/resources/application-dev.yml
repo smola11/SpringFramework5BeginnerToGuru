@@ -4,7 +4,6 @@ spring:
     username: sfg_dev_user
     password: guru
     platform: mysql
-    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: validate
