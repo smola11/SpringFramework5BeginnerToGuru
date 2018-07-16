@@ -83,7 +83,7 @@ public class ReactiveExamplesTest {
 
         people.delayElements(Duration.ofSeconds(1))
                 .subscribe(person -> log.info(person.sayMyName()));
-
+        // running in the background and we did not wait for output - no output is seen
     }
 
     @Test
@@ -97,7 +97,7 @@ public class ReactiveExamplesTest {
                 .doOnComplete(countDownLatch::countDown)
                 .subscribe(person -> log.info(person.sayMyName()));
 
-        countDownLatch.await();
+        countDownLatch.await(); // wait until countdown is complete
 
     }
 
