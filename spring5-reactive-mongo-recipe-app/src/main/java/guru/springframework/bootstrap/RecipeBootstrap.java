@@ -54,11 +54,11 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
         log.debug("Loading Bootstrap Data");
 
         log.error("#######");
-        log.error("Count: " + unitOfMeasureReactiveRepository.count().block().toString()); // block() says run this now - publisher give me that one Mono (Long which is the count);
+        log.error("UOM Count: " + unitOfMeasureReactiveRepository.count().block().toString()); // block() says run this now - publisher give me that one Mono (Long which is the count);
         log.error("#######");
-        log.error("Count: " + categoryReactiveRepository.count().block().toString());
+        log.error("Category Count: " + categoryReactiveRepository.count().block().toString());
         log.error("#######");
-        log.error("Count: " + recipeReactiveRepository.count().block().toString());
+        log.error("Recipe Count: " + recipeReactiveRepository.count().block().toString());
     }
 
     private void loadCategories(){
