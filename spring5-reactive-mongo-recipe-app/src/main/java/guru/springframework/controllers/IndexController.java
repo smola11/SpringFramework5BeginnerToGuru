@@ -23,7 +23,8 @@ public class IndexController {
     public String getIndexPage(Model model) {
         log.debug("Getting Index page");
 
-        model.addAttribute("recipes", recipeService.getRecipes().collectList().block());
+        // now we want to directly return Flux (reactive types) to Thymeleaf
+        model.addAttribute("recipes", recipeService.getRecipes());
 
         return "index";
     }
