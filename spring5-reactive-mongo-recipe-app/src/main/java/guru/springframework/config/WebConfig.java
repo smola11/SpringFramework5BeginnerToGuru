@@ -18,7 +18,7 @@ public class WebConfig {
     // with ok status and JSON
 
     @Bean
-    RouterFunction<?> routes(RecipeService recipeService) {
+    public RouterFunction<?> routes(RecipeService recipeService) {
         return RouterFunctions.route(GET("/api/recipes"),
                 serverRequest -> ServerResponse.ok()
                         .contentType(MediaType.APPLICATION_JSON)
