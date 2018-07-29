@@ -32,7 +32,9 @@ public class IngredientController {
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
-    @InitBinder
+    // earlier we had multiple data binders;
+    // this gets set with every web request;
+    @InitBinder("ingredient")
     public void initBinder(WebDataBinder webDataBinder) {
         this.webDataBinder = webDataBinder;
     }
@@ -83,7 +85,9 @@ public class IngredientController {
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute IngredientCommand command, @PathVariable String recipeId) {
+    public String saveOrUpdate(@ModelAttribute("ingredient") IngredientCommand command, @PathVariable String recipeId,
+                               Model model) {
+        // earlier we had multiple data binders;
         webDataBinder.validate();
         BindingResult bindingResult = webDataBinder.getBindingResult();
         if (bindingResult.hasErrors()) {
@@ -92,7 +96,8 @@ public class IngredientController {
                 log.debug(objectError.toString());
             });
 
-            return "recipe/" + recipeId + "/ingredient/" + command.getId() + "/update";
+            model.addAttribute("uomList", unitOfMeasureService.listAllUoms());
+            return "recipe/ingredient/ingredientform";
         }
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
