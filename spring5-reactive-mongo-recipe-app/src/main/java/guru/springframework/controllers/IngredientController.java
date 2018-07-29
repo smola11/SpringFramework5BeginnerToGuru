@@ -83,7 +83,7 @@ public class IngredientController {
     }
 
     @PostMapping("recipe/{recipeId}/ingredient")
-    public String saveOrUpdate(@ModelAttribute ("ingredient") IngredientCommand command) {
+    public String saveOrUpdate(@ModelAttribute IngredientCommand command, @PathVariable String recipeId) {
         webDataBinder.validate();
         BindingResult bindingResult = webDataBinder.getBindingResult();
         if (bindingResult.hasErrors()) {
@@ -92,7 +92,7 @@ public class IngredientController {
                 log.debug(objectError.toString());
             });
 
-            return "recipe/" + command.getRecipeId() + "/ingredient/" + command.getId() + "/update";
+            return "recipe/" + recipeId + "/ingredient/" + command.getId() + "/update";
         }
 
         IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command).block();
