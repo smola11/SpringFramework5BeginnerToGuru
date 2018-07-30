@@ -1,4 +1,4 @@
-package guru.springframework.springrestclientexamples.controller;
+package guru.springframework.springrestclientexamples.controllers;
 
 import guru.springframework.springrestclientexamples.service.ApiService;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class UserController {
     @PostMapping("/users")
     public String formPost(Model model, ServerWebExchange serverWebExchange) {
 
-        // Reactive way
+        // Generally we don't want to block it;
         MultiValueMap<String, String> map = serverWebExchange.getFormData().block();
 
         Integer limit = new Integer(map.get("limit").get(0));
