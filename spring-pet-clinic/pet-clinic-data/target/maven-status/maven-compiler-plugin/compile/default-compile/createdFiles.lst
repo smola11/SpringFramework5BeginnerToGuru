@@ -1,0 +1,5 @@
+com\maciej\springpetclinic\model\PetType.class
+com\maciej\springpetclinic\model\Vet.class
+com\maciej\springpetclinic\model\Owner.class
+com\maciej\springpetclinic\model\Pet.class
+com\maciej\springpetclinic\model\Person.class
