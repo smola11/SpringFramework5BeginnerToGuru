@@ -20,21 +20,28 @@
     <artifactId>spring-pet-clinic</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-pet-clinic</name>
-    <description>Sping project of pet clinic</description>
+    <description>Spring project of pet clinic</description>
 
     <properties>
         <java.version>1.8</java.version>
     </properties>
 
-    <dependencies>
-
-    </dependencies>
+    <scm>
+        <developerConnection>scm:git:https://github.com/smola11/SpringFramework5BeginnerToGuru.git</developerConnection>
+    </scm>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <goals>install</goals>
+                </configuration>
             </plugin>
         </plugins>
     </build>
